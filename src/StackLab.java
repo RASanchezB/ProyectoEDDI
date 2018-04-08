@@ -21,4 +21,20 @@ public class StackLab {
         }
         return true;
     }
+    public NodoLab top(){
+        if(lista.size()>0){
+            return lista.get(lista.size()-1);
+        }else{
+            return null;
+        }
+    }
+    public NodoLab pop(){
+        if(lista.get(0)==null){
+            return null;
+        }else{
+            NodoLab temp = lista.get(0);
+            lista.remove(0);
+            return temp;
+        }
+    }
 }
