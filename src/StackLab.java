@@ -37,4 +37,10 @@ public class StackLab {
             return temp;
         }
     }
+    public void clear(){
+        lista = new ArrayList();
+    }
+    public boolean IsEmpty(){
+        return lista.isEmpty();
+    }
 }
