@@ -1,18 +1,15 @@
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 public class Main extends javax.swing.JFrame {
 
     public Main() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -579,7 +576,6 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         JD_Laberinto.setEnabled(true);
         JD_Laberinto.setVisible(true);
@@ -612,6 +608,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8MouseClicked
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
         String Laberinto = TA_L.getText();
+        for (int i = 0; i < 10; i++) {
+            System.out.println("");
+            for (int j = 0; j < 10; j++) {
+                System.out.print(Lab[i][j]);
+            }
+        }
         
     }//GEN-LAST:event_jButton15MouseClicked
     private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
@@ -621,27 +623,39 @@ public class Main extends javax.swing.JFrame {
         TA_L.setText("");
         try {
             JFileChooser jcf = new JFileChooser();
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivo de Texto","txt");
-             FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("Imagenes","jpg","png","bmp");
-             jcf.setFileFilter(filtro);
-             jcf.addChoosableFileFilter(filtro2);
-             int seleccion = jcf.showOpenDialog(this);
-             if(seleccion == JFileChooser.APPROVE_OPTION){
-                 fichero = jcf.getSelectedFile();
-                 fr = new FileReader(fichero);
-                 br = new BufferedReader(fr);
-                 String linea;
-                 TA_L.setText("");
-                 while((linea=br.readLine()) != null){
-                     TA_L.append(linea);
-                     TA_L.append("\n");
-                 }
-             }
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivo de Texto", "txt");
+            FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("Imagenes", "jpg", "png", "bmp");
+            jcf.setFileFilter(filtro);
+            jcf.addChoosableFileFilter(filtro2);
+            int seleccion = jcf.showOpenDialog(this);
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                fichero = jcf.getSelectedFile();
+                fr = new FileReader(fichero);
+                br = new BufferedReader(fr);
+                String linea;
+                TA_L.setText("");
+                int cont = 0;
+                int cont2 = 0;
+                while ((linea = br.readLine()) != null) {
+                    TA_L.append(linea);
+                    TA_L.append("\n");
+                    int tam = linea.length();
+                    ////////////////////////////////////
+                    if (cont % 2 == 0) {
+                        for (int i = 0; i < tam; i++) {
+                            Lab[cont2][i] = linea.charAt(i);
+                        }
+                        cont2++;
+                    }
+                    cont++;
+                    ////////////////////////////////////
+                }
+            }
         } catch (Exception e) {
+            System.out.println("Paso algo");
         }
-        
-    }//GEN-LAST:event_jButton13MouseClicked
 
+    }//GEN-LAST:event_jButton13MouseClicked
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
         File fichero = null;
         FileReader fr = null;
@@ -649,28 +663,24 @@ public class Main extends javax.swing.JFrame {
         TA_L.setText("");
         try {
             JFileChooser jcf = new JFileChooser();
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivo de Texto","txt");
-             FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("Imagenes","jpg","png","bmp");
-             jcf.setFileFilter(filtro);
-             jcf.addChoosableFileFilter(filtro2);
-             int seleccion = jcf.showOpenDialog(this);
-             if(seleccion == JFileChooser.APPROVE_OPTION){
-                 fichero = jcf.getSelectedFile();
-                 fr = new FileReader(fichero);
-                 br = new BufferedReader(fr);
-                 String linea;
-                 TA_A.setText("");
-                 while((linea=br.readLine()) != null){
-                     TA_A.append("\n");
-                 }
-             }
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivo de Texto", "txt");
+            FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("Imagenes", "jpg", "png", "bmp");
+            jcf.setFileFilter(filtro);
+            jcf.addChoosableFileFilter(filtro2);
+            int seleccion = jcf.showOpenDialog(this);
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                fichero = jcf.getSelectedFile();
+                fr = new FileReader(fichero);
+                br = new BufferedReader(fr);
+                String linea;
+                TA_A.setText("");
+                while ((linea = br.readLine()) != null) {
+                    TA_A.append("\n");
+                }
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton10MouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -751,4 +761,5 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
+    char[][] Lab = new char[10][10];
 }
