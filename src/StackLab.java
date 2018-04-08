@@ -3,24 +3,17 @@ import java.util.ArrayList;
 
 public class StackLab {
     private ArrayList<NodoLab> lista = new ArrayList();
-    private int PosX;
-    private int PosY;
+    private int Size;
 
     public StackLab() {
+        Size = lista.size();
     }
-    public StackLab(int PosX, int PosY) {
-        this.PosX = PosX;
-        this.PosY = PosY;
-    }
+    
     public boolean push(NodoLab nod){
-        if(lista.get(0)==null){
-            lista.add(new NodoLab(PosX,PosY));
-        } else{
-            NodoLab data = (new NodoLab(PosX,PosY));
-            lista.add(0, data);
-        }
+        lista.add(0,nod);
         return true;
     }
+    
     public NodoLab top(){
         if(lista.size()>0){
             return lista.get(lista.size()-1);
@@ -29,12 +22,12 @@ public class StackLab {
         }
     }
     public NodoLab pop(){
-        if(lista.get(0)==null){
-            return null;
-        }else{
+        if(lista.size()> 0){
             NodoLab temp = lista.get(0);
             lista.remove(0);
             return temp;
+        }else{
+            return null;
         }
     }
     public void clear(){

@@ -827,13 +827,56 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton8MouseClicked
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
-        String Laberinto = TA_L.getText();
         for (int i = 0; i < 10; i++) {
             System.out.println("");
             for (int j = 0; j < 10; j++) {
                 System.out.print(Lab[i][j]);
             }
         }
+        StackLab SL = new StackLab();
+        NodoLab NA, Si;
+        SL.push(NA = new NodoLab(1,0));
+        int cont = 0;
+        do {
+            System.out.println(NA.getPosX()+", "+NA.getPosY());
+            NA = (NodoLab)SL.pop();
+            System.out.println(NA.getPosX()+", "+NA.getPosY());
+            if (NA.getPosX() < 10 && NA.getPosY()<10) {
+                Lab[NA.getPosX()][NA.getPosY()] = '@';
+                Si = new NodoLab(NA.getPosX() - 1, NA.getPosY());//Arriba del nodo actual
+                if ((Si.getPosX() >= 0 && Si.getPosX() < 10) && (Si.getPosY() >= 0 && Si.getPosY() < 10) && (Lab[Si.getPosX()][Si.getPosY()] == '.')) {
+                    SL.push(Si);
+                    System.out.println("Entro 1 if");
+                }
+                Si = new NodoLab(NA.getPosX(), NA.getPosY() + 1);//Derecha del nodo actual
+                if ((Si.getPosX() >= 0 && Si.getPosX() < 10) && (Si.getPosY() >= 0 && Si.getPosY() < 10) && (Lab[Si.getPosX()][Si.getPosY()] == '.')) {
+                    SL.push(Si);
+                    System.out.println("Entro 2 if");
+                }
+                Si = new NodoLab(NA.getPosX() + 1, NA.getPosY());//Abajo del nodo actual
+                if ((Si.getPosX() >= 0 && Si.getPosX() < 10) && (Si.getPosY() >= 0 && Si.getPosY() < 10) && (Lab[Si.getPosX()][Si.getPosY()] == '.')) {
+                    SL.push(Si);
+                    System.out.println("Entro 3 if");
+                }
+                Si = new NodoLab(NA.getPosX(), NA.getPosY() - 1);//Izquierda del nodo actual
+                if ((Si.getPosX() >= 0 && Si.getPosX() < 10) && (Si.getPosY() >= 0 && Si.getPosY() < 10) && (Lab[Si.getPosX()][Si.getPosY()] == '.')) {
+                    SL.push(Si);
+                    System.out.println("Entro 4 if");
+                }
+            }
+            System.out.println(NA.getPosX()+", "+NA.getPosY());
+        } while (!SL.IsEmpty());
+        String Laber = "";
+        for (int i = 0; i < 10; i++) {
+            System.out.println("");
+            for (int j = 0; j < 10; j++) {
+                System.out.print(Lab[i][j]);
+                Laber+=Lab[i][j];
+            }
+            Laber+="\n";
+        }
+        TA_L.setText("");
+        TA_L.setText(Laber);
 
     }//GEN-LAST:event_jButton15MouseClicked
     private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
@@ -861,7 +904,7 @@ public class Main extends javax.swing.JFrame {
                     TA_L.append("\n");
                     int tam = linea.length();
                     ////////////////////////////////////
-                    if (cont % 2 == 0) {
+                    if (cont % 1 == 0) {
                         for (int i = 0; i < tam; i++) {
                             Lab[cont2][i] = linea.charAt(i);
                         }
@@ -901,75 +944,57 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton10MouseClicked
-
     private void jb_DELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_DELActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_DELActionPerformed
-
     private void jb_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_7MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "7");
     }//GEN-LAST:event_jb_7MouseClicked
-
     private void jb_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_8MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "8");
     }//GEN-LAST:event_jb_8MouseClicked
-
     private void jb_9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_9MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "9");
     }//GEN-LAST:event_jb_9MouseClicked
-
     private void jb_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_4MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "4");
     }//GEN-LAST:event_jb_4MouseClicked
-
     private void jb_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_5MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "5");
     }//GEN-LAST:event_jb_5MouseClicked
-
     private void jb_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_6MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "6");
     }//GEN-LAST:event_jb_6MouseClicked
-
     private void jb_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_1MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "1");
     }//GEN-LAST:event_jb_1MouseClicked
-
     private void jb_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_2MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "2");
     }//GEN-LAST:event_jb_2MouseClicked
-
     private void jb_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_3MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "3");
     }//GEN-LAST:event_jb_3MouseClicked
-
     private void jb_0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_0MouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "0");
     }//GEN-LAST:event_jb_0MouseClicked
-
     private void jb_xMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_xMouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "*");
     }//GEN-LAST:event_jb_xMouseClicked
-
     private void jb_divisionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_divisionMouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "/");
     }//GEN-LAST:event_jb_divisionMouseClicked
-
     private void jb_sumaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_sumaMouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "+");
     }//GEN-LAST:event_jb_sumaMouseClicked
-
     private void jb_restaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_restaMouseClicked
         jt_pantalla.setText(jt_pantalla.getText() + "-");
     }//GEN-LAST:event_jb_restaMouseClicked
-
     private void jb_DELMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_DELMouseClicked
         jt_pantalla.setText("");
     }//GEN-LAST:event_jb_DELMouseClicked
-
     private void jb_ACMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ACMouseClicked
         jt_pantalla.setText("");
     }//GEN-LAST:event_jb_ACMouseClicked
-
     private void jb_totalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_totalMouseClicked
         String calculo = jt_pantalla.getText();
         int cont = 0;
@@ -1055,7 +1080,6 @@ public class Main extends javax.swing.JFrame {
         } while (numeros.size() != 1);
         jt_pantalla.setText(numeros.get(0).toString());
     }//GEN-LAST:event_jb_totalMouseClicked
-
     private void boton_jefeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_jefeMouseClicked
         String root = JOptionPane.showInputDialog(this, "Introduzca su nombre");
         Root = new Node<>(root + "-0");
@@ -1070,7 +1094,6 @@ public class Main extends javax.swing.JFrame {
         boton_jefe.setEnabled(false);
         boton_jefe.setVisible(false);
     }//GEN-LAST:event_boton_jefeMouseClicked
-
     private void ArbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ArbolMouseClicked
         if (SwingUtilities.isRightMouseButton(evt)) {
             int row = Arbol.getClosestRowForLocation(evt.getX(), evt.getY());
@@ -1079,11 +1102,9 @@ public class Main extends javax.swing.JFrame {
             Menu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_ArbolMouseClicked
-
     private void jm_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jm_hijoMouseClicked
 
     }//GEN-LAST:event_jm_hijoMouseClicked
-
     private void jm_hijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_hijoActionPerformed
         Node n = new Node();
         String empleado = "";
@@ -1099,8 +1120,8 @@ public class Main extends javax.swing.JFrame {
         System.out.println(selectedElement);
         if (Root.getData().equals(selectedElement.toString())) {
             Empleado = Root.addChild(new Node<>(empleado));
-        }else{
-            
+        } else {
+
         }
         DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
