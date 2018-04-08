@@ -3,13 +3,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 public class Main extends javax.swing.JFrame {
 
+    Node<String> Root = null;
+
     public Main() {
+
         initComponents();
     }
 
@@ -17,11 +24,14 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Menu = new javax.swing.JPopupMenu();
+        jm_hijo = new javax.swing.JMenuItem();
         JD_Arboles = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        Arbol = new javax.swing.JTree();
+        boton_jefe = new javax.swing.JButton();
         JD_Calculadora = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -77,14 +87,39 @@ public class Main extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
+        jm_hijo.setText("AñadirHijo");
+        jm_hijo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jm_hijoMouseClicked(evt);
+            }
+        });
+        jm_hijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_hijoActionPerformed(evt);
+            }
+        });
+        Menu.add(jm_hijo);
+
         jPanel2.setToolTipText("Arbol");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        Arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        Arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ArbolMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Arbol);
+
+        boton_jefe.setText("Añadir Jefe Principal");
+        boton_jefe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_jefeMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -93,7 +128,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addGap(76, 76, 76)
+                .addComponent(boton_jefe, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,6 +138,10 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(boton_jefe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -124,7 +165,7 @@ public class Main extends javax.swing.JFrame {
         JD_Arboles.getContentPane().setLayout(JD_ArbolesLayout);
         JD_ArbolesLayout.setHorizontalGroup(
             JD_ArbolesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 687, Short.MAX_VALUE)
+            .addGap(0, 743, Short.MAX_VALUE)
             .addGroup(JD_ArbolesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JD_ArbolesLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -760,15 +801,16 @@ public class Main extends javax.swing.JFrame {
         JD_Laberinto.pack();
     }//GEN-LAST:event_jButton1MouseClicked
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        JD_Calculadora.setEnabled(true);
-        JD_Calculadora.setVisible(true);
-        JD_Calculadora.pack();
+        JD_Arboles.setEnabled(true);
+        JD_Arboles.setSize(800, 500);
+        JD_Arboles.setLocationRelativeTo(null);
+        JD_Arboles.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        JD_Calculadora.setSize(200,200);
+        JD_Calculadora.setSize(200, 200);
         JD_Calculadora.setLocationRelativeTo(null);
         JD_Calculadora.setVisible(true);
-        
+
         JD_Calculadora.pack();
     }//GEN-LAST:event_jButton3MouseClicked
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
@@ -782,9 +824,7 @@ public class Main extends javax.swing.JFrame {
         JD_GrafoBipartido.pack();
     }//GEN-LAST:event_jButton5MouseClicked
     private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
-        JD_Arboles.setEnabled(true);
-        JD_Arboles.setVisible(true);
-        JD_Arboles.pack();
+
     }//GEN-LAST:event_jButton8MouseClicked
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
         String Laberinto = TA_L.getText();
@@ -932,7 +972,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_totalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_totalMouseClicked
         String calculo = jt_pantalla.getText();
-        int cont=0;
+        int cont = 0;
         ArrayList numeros = new ArrayList();
         ArrayList operaciones = new ArrayList();
 
@@ -1015,6 +1055,58 @@ public class Main extends javax.swing.JFrame {
         } while (numeros.size() != 1);
         jt_pantalla.setText(numeros.get(0).toString());
     }//GEN-LAST:event_jb_totalMouseClicked
+
+    private void boton_jefeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_jefeMouseClicked
+        String root = JOptionPane.showInputDialog(this, "Introduzca su nombre");
+        Root = new Node<>(root + "-0");
+
+        DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
+
+        DefaultMutableTreeNode n = new DefaultMutableTreeNode(Root.getData());
+
+        model.setRoot(n);
+        model.reload();
+        boton_jefe.setEnabled(false);
+        boton_jefe.setVisible(false);
+    }//GEN-LAST:event_boton_jefeMouseClicked
+
+    private void ArbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ArbolMouseClicked
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            int row = Arbol.getClosestRowForLocation(evt.getX(), evt.getY());
+            Arbol.setSelectionRow(row);
+
+            Menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_ArbolMouseClicked
+
+    private void jm_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jm_hijoMouseClicked
+
+    }//GEN-LAST:event_jm_hijoMouseClicked
+
+    private void jm_hijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_hijoActionPerformed
+        Node n = new Node();
+        String empleado = "";
+
+        empleado = JOptionPane.showInputDialog(this, "Introduzca su nombre");
+        System.out.println("Desempeño");
+        String prom = JOptionPane.showInputDialog(this, "Introduzca su desempeño");
+        empleado = empleado + "-" + prom;
+        Node<String> Empleado = null;
+        //System.out.println(empleado);
+        DefaultMutableTreeNode selectedElement
+                = (DefaultMutableTreeNode) Arbol.getSelectionPath().getLastPathComponent();
+        System.out.println(selectedElement);
+        if (Root.getData().equals(selectedElement.toString())) {
+            Empleado = Root.addChild(new Node<>(empleado));
+        }else{
+            
+        }
+        DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
+        raiz.add(new DefaultMutableTreeNode(Empleado.getData()));
+        model.reload();
+    }//GEN-LAST:event_jm_hijoActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1048,14 +1140,17 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTree Arbol;
     private javax.swing.JDialog JD_Arboles;
     private javax.swing.JDialog JD_Calculadora;
     private javax.swing.JDialog JD_Calculo;
     private javax.swing.JDialog JD_Compresion;
     private javax.swing.JDialog JD_GrafoBipartido;
     private javax.swing.JDialog JD_Laberinto;
+    private javax.swing.JPopupMenu Menu;
     private javax.swing.JTextArea TA_A;
     private javax.swing.JTextArea TA_L;
+    private javax.swing.JButton boton_jefe;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1088,7 +1183,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTree jTree1;
     private javax.swing.JButton jb_0;
     private javax.swing.JButton jb_1;
     private javax.swing.JButton jb_2;
@@ -1106,6 +1200,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jb_suma;
     private javax.swing.JButton jb_total;
     private javax.swing.JButton jb_x;
+    private javax.swing.JMenuItem jm_hijo;
     private javax.swing.JTextField jt_pantalla;
     // End of variables declaration//GEN-END:variables
     char[][] Lab = new char[10][10];
