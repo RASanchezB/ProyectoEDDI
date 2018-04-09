@@ -1,6 +1,9 @@
+
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -16,7 +19,7 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
         initComponents();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -55,11 +58,15 @@ public class Main extends javax.swing.JFrame {
         JD_Compresion = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TA_A = new javax.swing.JTextArea();
+        TA_Buscado = new javax.swing.JTextArea();
+        jt_direccion = new javax.swing.JTextField();
+        bt_BuscarArchivo = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TA_Binario = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         JD_GrafoBipartido = new javax.swing.JDialog();
         JD_Laberinto = new javax.swing.JDialog();
         jPanel8 = new javax.swing.JPanel();
@@ -442,20 +449,32 @@ public class Main extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jButton10.setText("Examinar");
-        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel4.setText("El archivo a comprimir es:");
+
+        TA_Buscado.setEditable(false);
+        TA_Buscado.setColumns(20);
+        TA_Buscado.setRows(5);
+        TA_Buscado.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(TA_Buscado);
+
+        jt_direccion.setEditable(false);
+
+        bt_BuscarArchivo.setText("Buscar Archivo");
+        bt_BuscarArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton10MouseClicked(evt);
+                bt_BuscarArchivoMouseClicked(evt);
             }
         });
 
-        jButton11.setText("Comprimir");
+        TA_Binario.setEditable(false);
+        TA_Binario.setColumns(20);
+        TA_Binario.setRows(5);
+        TA_Binario.setWrapStyleWord(true);
+        jScrollPane4.setViewportView(TA_Binario);
 
-        jLabel4.setText("El archivo a comprimir es:");
+        jLabel10.setText("Texto Buscado");
 
-        TA_A.setColumns(20);
-        TA_A.setRows(5);
-        jScrollPane3.setViewportView(TA_A);
+        jLabel11.setText("Texto a Binario");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -463,33 +482,51 @@ public class Main extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                        .addComponent(jScrollPane3))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(bt_BuscarArchivo)))
+                        .addGap(0, 60, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jButton10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                .addComponent(jButton11)
-                .addGap(103, 103, 103))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(199, 199, 199))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(200, 200, 200))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton11)
-                    .addComponent(jButton10))
-                .addContainerGap())
+                    .addComponent(jt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_BuscarArchivo))
+                .addGap(10, 10, 10)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -498,22 +535,22 @@ public class Main extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout JD_CompresionLayout = new javax.swing.GroupLayout(JD_Compresion.getContentPane());
         JD_Compresion.getContentPane().setLayout(JD_CompresionLayout);
         JD_CompresionLayout.setHorizontalGroup(
             JD_CompresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
             .addGroup(JD_CompresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(JD_CompresionLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -522,7 +559,7 @@ public class Main extends javax.swing.JFrame {
         );
         JD_CompresionLayout.setVerticalGroup(
             JD_CompresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 361, Short.MAX_VALUE)
             .addGroup(JD_CompresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(JD_CompresionLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -862,12 +899,6 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
@@ -883,7 +914,12 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
@@ -951,6 +987,8 @@ public class Main extends javax.swing.JFrame {
         JD_Calculadora.pack();
     }//GEN-LAST:event_jButton3MouseClicked
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        JD_Compresion.setSize(600, 500);
+        JD_Compresion.setLocationRelativeTo(null);
         JD_Compresion.setEnabled(true);
         JD_Compresion.setVisible(true);
         JD_Compresion.pack();
@@ -972,13 +1010,13 @@ public class Main extends javax.swing.JFrame {
         }
         StackLab SL = new StackLab();
         NodoLab NA, Si;
-        SL.push(NA = new NodoLab(1,0));
+        SL.push(NA = new NodoLab(1, 0));
         int cont = 0;
         do {
-            System.out.println(NA.getPosX()+", "+NA.getPosY());
-            NA = (NodoLab)SL.pop();
-            System.out.println(NA.getPosX()+", "+NA.getPosY());
-            if (NA.getPosX() < 10 && NA.getPosY()<10) {
+            System.out.println(NA.getPosX() + ", " + NA.getPosY());
+            NA = (NodoLab) SL.pop();
+            System.out.println(NA.getPosX() + ", " + NA.getPosY());
+            if (NA.getPosX() < 10 && NA.getPosY() < 10) {
                 Lab[NA.getPosX()][NA.getPosY()] = '@';
                 Si = new NodoLab(NA.getPosX() - 1, NA.getPosY());//Arriba del nodo actual
                 if ((Si.getPosX() >= 0 && Si.getPosX() < 10) && (Si.getPosY() >= 0 && Si.getPosY() < 10) && (Lab[Si.getPosX()][Si.getPosY()] == '.')) {
@@ -1001,16 +1039,16 @@ public class Main extends javax.swing.JFrame {
                     System.out.println("Entro 4 if");
                 }
             }
-            System.out.println(NA.getPosX()+", "+NA.getPosY());
+            System.out.println(NA.getPosX() + ", " + NA.getPosY());
         } while (!SL.IsEmpty());
         String Laber = "";
         for (int i = 0; i < 10; i++) {
             System.out.println("");
             for (int j = 0; j < 10; j++) {
                 System.out.print(Lab[i][j]);
-                Laber+=Lab[i][j];
+                Laber += Lab[i][j];
             }
-            Laber+="\n";
+            Laber += "\n";
         }
         TA_L.setText("");
         TA_L.setText(Laber);
@@ -1056,31 +1094,6 @@ public class Main extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton13MouseClicked
-    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
-        File fichero = null;
-        FileReader fr = null;
-        BufferedReader br = null;
-        TA_L.setText("");
-        try {
-            JFileChooser jcf = new JFileChooser();
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivo de Texto", "txt");
-            FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("Imagenes", "jpg", "png", "bmp");
-            jcf.setFileFilter(filtro);
-            jcf.addChoosableFileFilter(filtro2);
-            int seleccion = jcf.showOpenDialog(this);
-            if (seleccion == JFileChooser.APPROVE_OPTION) {
-                fichero = jcf.getSelectedFile();
-                fr = new FileReader(fichero);
-                br = new BufferedReader(fr);
-                String linea;
-                TA_A.setText("");
-                while ((linea = br.readLine()) != null) {
-                    TA_A.append("\n");
-                }
-            }
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton10MouseClicked
     private void jb_DELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_DELActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_DELActionPerformed
@@ -1266,23 +1279,23 @@ public class Main extends javax.swing.JFrame {
         model.reload();
     }//GEN-LAST:event_jm_hijoActionPerformed
     private void jButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseClicked
-        int origen = (int)JS_Origen.getValue();
-        int destiny = (int)JS_Destino.getValue();
-        int peso = (int)JS_Peso.getValue();
-        if(origen == destiny){
-            JOptionPane.showMessageDialog(Menu,"No se puede dirigir hacia el mismo");
-        }else{
-            Aristas a = (new Aristas(origen,destiny,peso));
+        int origen = (int) JS_Origen.getValue();
+        int destiny = (int) JS_Destino.getValue();
+        int peso = (int) JS_Peso.getValue();
+        if (origen == destiny) {
+            JOptionPane.showMessageDialog(Menu, "No se puede dirigir hacia el mismo");
+        } else {
+            Aristas a = (new Aristas(origen, destiny, peso));
             boolean Existe = true;
             for (int i = 0; i < AA.size(); i++) {
-                if(a == AA.get(i)){
+                if (a == AA.get(i)) {
                     Existe = false;
                 }
             }
-            if(Existe){
+            if (Existe) {
                 AA.add(a);
                 System.out.println("Se agrego la arista");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(Menu, "Esta arista ya existe");
             }
         }
@@ -1292,8 +1305,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16MouseClicked
 
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
-        int Id = (int)JS_Nodo.getValue();
-        Nodo A = new Nodo(Id,AA);
+        int Id = (int) JS_Nodo.getValue();
+        Nodo A = new Nodo(Id, AA);
         AA = new ArrayList();
         Stack.push(A);
         System.out.println("Se agrego el nodo");
@@ -1309,6 +1322,37 @@ public class Main extends javax.swing.JFrame {
         Creacion_Grafos.setVisible(true);
         Creacion_Grafos.pack();
     }//GEN-LAST:event_jButton9MouseClicked
+
+    private void bt_BuscarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_BuscarArchivoMouseClicked
+        String texto,binario;
+        
+        JFileChooser jf = new JFileChooser();
+        jf.setFileFilter(new FileNameExtensionFilter("Text files", "txt"));
+        int retorno = jf.showOpenDialog(this);
+        if (retorno == 0) {
+            File f = jf.getSelectedFile();
+            try {
+                texto = readfile(f.getAbsolutePath());
+                jt_direccion.setText(f.getAbsolutePath());
+                TA_Buscado.setText(texto);
+                Huffman hf=new Huffman(texto);
+                binario=hf.compresion();
+                TA_Binario.setText(binario);
+            } catch (Exception e) {
+            }
+        }
+
+    }//GEN-LAST:event_bt_BuscarArchivoMouseClicked
+    
+    public static String readfile(String path) throws FileNotFoundException, IOException {
+        String acum, line;
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        acum = "";
+        while ((line = br.readLine()) != null) {
+            acum += line;
+        }
+        return acum;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1355,12 +1399,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner JS_Origen;
     private javax.swing.JSpinner JS_Peso;
     private javax.swing.JPopupMenu Menu;
-    private javax.swing.JTextArea TA_A;
+    private javax.swing.JTextArea TA_Binario;
+    private javax.swing.JTextArea TA_Buscado;
     private javax.swing.JTextArea TA_L;
     private javax.swing.JButton boton_jefe;
+    private javax.swing.JButton bt_BuscarArchivo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
@@ -1376,6 +1420,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1398,6 +1444,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JButton jb_0;
@@ -1418,6 +1465,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jb_total;
     private javax.swing.JButton jb_x;
     private javax.swing.JMenuItem jm_hijo;
+    private javax.swing.JTextField jt_direccion;
     private javax.swing.JTextField jt_pantalla;
     // End of variables declaration//GEN-END:variables
     char[][] Lab = new char[10][10];
