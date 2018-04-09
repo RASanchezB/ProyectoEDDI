@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 
 public class Main extends javax.swing.JFrame {
 
@@ -34,6 +35,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Arbol = new javax.swing.JTree();
         boton_jefe = new javax.swing.JButton();
+        jb_Actualizar = new javax.swing.JButton();
         JD_Calculadora = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -142,6 +144,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jb_Actualizar.setText("Actualizar");
+        jb_Actualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_ActualizarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -150,7 +159,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
-                .addComponent(boton_jefe, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(boton_jefe, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                    .addComponent(jb_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -162,6 +173,8 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(boton_jefe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
+                .addComponent(jb_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1232,7 +1245,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_totalMouseClicked
     private void boton_jefeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_jefeMouseClicked
         String root = JOptionPane.showInputDialog(this, "Introduzca su nombre");
-        Root = new Node<>(root + "-0");
+        Root = new Node<>(root + "-");
 
         DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
@@ -1272,11 +1285,16 @@ public class Main extends javax.swing.JFrame {
             Empleado = Root.addChild(new Node<>(empleado));
         } else {
 
+            JOptionPane.showMessageDialog(Menu, "NO se puede");
         }
-        DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
-        raiz.add(new DefaultMutableTreeNode(Empleado.getData()));
-        model.reload();
+        try {
+            DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
+            raiz.add(new DefaultMutableTreeNode(Empleado.getData()));
+            model.reload();
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_jm_hijoActionPerformed
     private void jButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseClicked
         int origen = (int) JS_Origen.getValue();
@@ -1324,8 +1342,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9MouseClicked
 
     private void bt_BuscarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_BuscarArchivoMouseClicked
-        String texto,binario;
-        
+        String texto, binario;
+
         JFileChooser jf = new JFileChooser();
         jf.setFileFilter(new FileNameExtensionFilter("Text files", "txt"));
         int retorno = jf.showOpenDialog(this);
@@ -1335,15 +1353,51 @@ public class Main extends javax.swing.JFrame {
                 texto = readfile(f.getAbsolutePath());
                 jt_direccion.setText(f.getAbsolutePath());
                 TA_Buscado.setText(texto);
-                Huffman hf=new Huffman(texto);
-                binario=hf.compresion();
+                Huffman hf = new Huffman(texto);
+                binario = hf.compresion();
                 TA_Binario.setText(binario);
             } catch (Exception e) {
             }
         }
 
     }//GEN-LAST:event_bt_BuscarArchivoMouseClicked
-    
+
+    private void jb_ActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ActualizarMouseClicked
+        DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
+
+        
+        double acum=0,total=0;
+        int cont=0;
+        String temp,numero;
+        for (int i = 0; i < Root.getChildren().size(); i++) {
+            temp=Root.getChildren().get(i).getData();
+            int index=temp.indexOf("-");
+            numero=temp.substring(index+1, Root.getChildren().get(i).getData().length());
+            acum+=Double.parseDouble(numero);
+            cont++;
+        }
+        total=acum/cont;
+        numero=Double.toString(total);
+        temp=Root.getData();
+        Root.setData(temp+"/"+numero);
+        //
+        DefaultMutableTreeNode n = new DefaultMutableTreeNode(Root.getData());
+        int algo=model.getChildCount(raiz);
+        ArrayList hijos=new ArrayList();
+        for (int i = 0; i < algo; i++) {
+            hijos.add(model.getChild(raiz, i));
+        }
+        model.setRoot(n);
+        model.reload();
+         model = (DefaultTreeModel) Arbol.getModel();
+        raiz = (DefaultMutableTreeNode) model.getRoot();
+        for (int i = 0; i < hijos.size(); i++) {
+            raiz.add((MutableTreeNode) hijos.get(i));
+        }
+        model.reload();
+    }//GEN-LAST:event_jb_ActualizarMouseClicked
+
     public static String readfile(String path) throws FileNotFoundException, IOException {
         String acum, line;
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -1353,6 +1407,7 @@ public class Main extends javax.swing.JFrame {
         }
         return acum;
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1458,6 +1513,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jb_8;
     private javax.swing.JButton jb_9;
     private javax.swing.JButton jb_AC;
+    private javax.swing.JButton jb_Actualizar;
     private javax.swing.JButton jb_DEL;
     private javax.swing.JButton jb_division;
     private javax.swing.JButton jb_resta;
