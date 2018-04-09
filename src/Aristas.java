@@ -1,31 +1,31 @@
 public class Aristas {
-    private char origen;
-    private char destino;
+    private int origen;
+    private int destino;
     private int peso;
 
     public Aristas() {
     }
 
-    public Aristas(char origen, char destino, int peso) {
+    public Aristas(int origen, int destino, int peso) {
         this.origen = origen;
         this.destino = destino;
         this.peso = peso;
     }
 
     
-    public char getOrigen() {
+    public int getOrigen() {
         return origen;
     }
 
-    public void setOrigen(char origen) {
+    public void setOrigen(int origen) {
         this.origen = origen;
     }
 
-    public char getDestino() {
+    public int getDestino() {
         return destino;
     }
 
-    public void setDestino(char destino) {
+    public void setDestino(int destino) {
         this.destino = destino;
     }
 
