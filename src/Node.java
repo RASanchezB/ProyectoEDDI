@@ -10,6 +10,24 @@ public class Node<T> {
 
     private Node<T> parent = null;
 
+    String value;
+    int count;
+    Node izquierda;
+    Node derecha;
+    Node linker;
+    Node linkerBack;
+
+    public Node(String value, int count) {
+        this.value = value;
+        this.count = count;
+        this.izquierda = null;
+        this.derecha = null;
+        this.linker = null;
+        this.linkerBack = null ;
+    }
+    
+    
+
     public Node(T data) {
         this.data = data;
     }
@@ -32,7 +50,7 @@ public class Node<T> {
         return children;
     }
 
-    public  T getData() {
+    public T getData() {
         return data;
     }
 
