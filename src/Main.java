@@ -1448,7 +1448,8 @@ public class Main extends javax.swing.JFrame {
         jt_pantalla.setText("");
     }//GEN-LAST:event_jb_ACMouseClicked
     private void jb_totalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_totalMouseClicked
-        String calculo = jt_pantalla.getText();
+        try {
+            String calculo = jt_pantalla.getText();
         int cont = 0;
         ArrayList numeros = new ArrayList();
         ArrayList operaciones = new ArrayList();
@@ -1531,6 +1532,10 @@ public class Main extends javax.swing.JFrame {
             }
         } while (numeros.size() != 1);
         jt_pantalla.setText(numeros.get(0).toString());
+        } catch (Exception e) {
+            System.out.println("Introduzca operaciones seguidas ,porfavor siga las instrucciones");
+        }
+        
     }//GEN-LAST:event_jb_totalMouseClicked
     private void boton_jefeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_jefeMouseClicked
         String root = JOptionPane.showInputDialog(this, "Introduzca su nombre");
