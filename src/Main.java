@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,16 +15,11 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
-
 public class Main extends javax.swing.JFrame {
-
     Node<String> Root = null;
-
     public Main() {
         initComponents();
-
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1294,7 +1288,6 @@ public class Main extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jm_hijoActionPerformed
-
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
         DefaultListModel lista1 = (DefaultListModel)JL_LNodo1.getModel();
         DefaultListModel lista2 = (DefaultListModel)JL_LNodo2.getModel();
@@ -1302,18 +1295,16 @@ public class Main extends javax.swing.JFrame {
         lista1.addElement(TF_IdNodo.getText());
         lista2.addElement(TF_IdNodo.getText());
     }//GEN-LAST:event_jButton14MouseClicked
-
     private void jButton17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseClicked
         Stack = new STACK();
+        grafo = new SingleGraph("Grafo");
         System.out.println("Reiniciado");
     }//GEN-LAST:event_jButton17MouseClicked
-
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         Creacion_Grafos.setEnabled(true);
         Creacion_Grafos.setVisible(true);
         Creacion_Grafos.pack();
     }//GEN-LAST:event_jButton9MouseClicked
-
     private void bt_BuscarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_BuscarArchivoMouseClicked
         String texto, binario;
 
@@ -1334,7 +1325,6 @@ public class Main extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_bt_BuscarArchivoMouseClicked
-
     private void jb_ActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ActualizarMouseClicked
         DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
@@ -1370,7 +1360,6 @@ public class Main extends javax.swing.JFrame {
         }
         model.reload();
     }//GEN-LAST:event_jb_ActualizarMouseClicked
-
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
         DefaultListModel lista1 = (DefaultListModel)JL_LNodo1.getModel();
         DefaultListModel lista2 = (DefaultListModel)JL_LNodo2.getModel();
@@ -1380,14 +1369,12 @@ public class Main extends javax.swing.JFrame {
         if(!(N1).equals(N2)){
             grafo.addEdge(N3, N1, N2);
         }else{
-            JOptionPane.showMessageDialog(Menu, "No se puede crear una arista entre el mismo nodo");
+            JOptionPane.showMessageDialog(Menu, "No se puede crear una arista hacia el mismo nodo");
         }
     }//GEN-LAST:event_jButton10MouseClicked
-
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
         grafo.display();
     }//GEN-LAST:event_jButton11MouseClicked
-
     public static String readfile(String path) throws FileNotFoundException, IOException {
         String acum, line;
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -1397,7 +1384,6 @@ public class Main extends javax.swing.JFrame {
         }
         return acum;
     }
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1429,7 +1415,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree Arbol;
     private javax.swing.JDialog Creacion_Grafos;
