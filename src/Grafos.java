@@ -10,13 +10,16 @@ import org.graphstream.graph.Graph;
 import org.graphstream.graph.Edge;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Grafos {
 
     public Graph G = new SingleGraph("Grafo");
     public double[][] Lados;
+    public static Random random=new Random();
     public static Scanner sc = new Scanner(System.in);
+    String line;
 
     public Grafos() {
     }
@@ -115,7 +118,7 @@ public class Grafos {
         G.clear();
         int cont = 0;
         //String line = "0,1,3,0,4/1,0,2,7,8/3,2,0,5,0/0,7,5,0,0/4,8,0,0,0/";
-        String line="0,1,5,3/1,0,2,0/5,2,0,4/3,0,4,0/";
+        line="0,1,5,3/1,0,2,0/5,2,0,4/3,0,4,0/";
         boolean creado = false;
         double weight;
         int fila = 0, arista = 0;
@@ -151,5 +154,16 @@ public class Grafos {
             fila++;
             cont++;
         } while ((cont != auxiliar.length));
+    }
+    
+    public void random(){
+        int azar=0+random.nextInt(2);
+        if (azar==0) {
+            line="0,1,5,3/1,0,2,0/5,2,0,4/3,0,4,0/";
+        }else if (azar==1) {
+            line="0,1,2,3/1,0,3,0/4,1,0,3/4,0,2,0/";
+        } else{
+            line = "0,1,3,0,4/1,0,2,7,8/3,2,0,5,0/0,7,5,0,0/4,8,0,0,0/";
+        }
     }
 }
