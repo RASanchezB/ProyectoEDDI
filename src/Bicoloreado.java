@@ -47,6 +47,36 @@ public class Bicoloreado  extends Grafos{
             G.addAttribute("ui.stylesheet","node{fill-color:grey}");
         }
     }
+    public void Proceso(Node O){
+        boolean b = false;
+        if(Color == 1){
+            O.setAttribute("ui.style","fill-color: rgb(50,205,50);");
+            Color = 2;
+        }else{
+            O.setAttribute("ui.style","fill-color: rgb(75,0,130);");
+            Color = 1;
+        }
+        ArrayList<Node> V = Conectados(O);
+        O.setAttribute("Visto", true);
+        for (Node node : V) {
+            b = (boolean)node.getAttribute("Visto");
+            if(node != null && b == false){
+                Proceso(node);
+            }
+        }
+    }
+    public boolean Colorear(){
+        boolean colorear = true;
+        for (Node node : G) {
+            ArrayList<Node> N = Conectados(node);
+            for (Node node1 : N) {
+                if(node.getAttribute("ui.style")==node1.getArray("ui.style")){
+                    colorear = false;
+                }
+            }
+        }
+        return colorear;
+    }
     public int Precursor(int O){
         boolean color = false;
         if(O>=0 && O<G.getNodeCount()){
@@ -54,10 +84,18 @@ public class Bicoloreado  extends Grafos{
             color = Colorear();
             if(color){
                 JOptionPane.showMessageDialog(null,"Este grafo se puede colorear");
-              
+                Viewer D = Demostrar();
+                D.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+                return 1;
             }else{
                 JOptionPane.showMessageDialog(null, "No logro ser coloreable");
+                Viewer D = Demostrar();
+                D.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+                return 2;
             }
+        }else{
+            System.out.println("No fue posible");
+            return 3;
         }
     }
 }
