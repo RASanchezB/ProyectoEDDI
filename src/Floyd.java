@@ -69,5 +69,26 @@ public class Floyd extends Grafos {
         }
         return matriz;
     }
+    public String MatrizFloyd(double[][] matriz) {
+        String retorno = "";
+        for (int i = 0; i < G.getNodeCount() + 1; i++) {
+            for (int j = 0; j < G.getNodeCount() + 1; j++) {
+                if (i == 0 && j == 0) {
+                    retorno += "{ }";
+                } else if (i == 0) {
+                    retorno += "  " + j + "  ";
+                } else if (j == 0) {
+                    retorno += " " + i + " ";
+                } else if (matriz[i - 1][j - 1] == Double.POSITIVE_INFINITY) {
+                    retorno += " +∞ ";
+                } else {
+                    retorno += " " + matriz[i - 1][j - 1] + " ";
+                }
+            }
+            retorno += '\n';
+
+        }
+        return retorno;
+    }
     
 }

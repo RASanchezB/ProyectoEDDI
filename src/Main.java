@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -21,7 +24,8 @@ import org.graphstream.ui.view.Viewer;
 public class Main extends javax.swing.JFrame {
 
     Node<String> Root = null;
-    int cont=0;
+    int cont = 0;
+
     public Main() {
         initComponents();
     }
@@ -111,6 +115,20 @@ public class Main extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         bt_CalcularRutasMasCortas = new javax.swing.JButton();
         bt_EnseñarMatriz = new javax.swing.JButton();
+        JD_Dijkstra = new javax.swing.JDialog();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        bt_AgregarNodo1 = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        ta_Matriz1 = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        ta_rutas1 = new javax.swing.JTextArea();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        bt_CalcularRutasMasCortas1 = new javax.swing.JButton();
+        bt_EnseñarMatriz1 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -871,6 +889,11 @@ public class Main extends javax.swing.JFrame {
         jLabel12.setText("Rutas mas Cortas");
 
         bt_CalcularRutasMasCortas.setText("Calcular");
+        bt_CalcularRutasMasCortas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_CalcularRutasMasCortasMouseClicked(evt);
+            }
+        });
 
         bt_EnseñarMatriz.setText("Enseñar Matriz");
         bt_EnseñarMatriz.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -886,56 +909,53 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_EnseñarMatriz)
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel9)
+                        .addGap(208, 208, 208)
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bt_AgregarNodo)
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bt_EnseñarMatriz)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bt_CalcularRutasMasCortas))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel9)
-                        .addGap(157, 157, 157)
-                        .addComponent(jLabel12)))
-                .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(241, 241, 241))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                        .addComponent(bt_AgregarNodo)
-                        .addGap(107, 107, 107))))
+                        .addGap(229, 229, 229)
+                        .addComponent(jLabel7)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addComponent(jLabel7)
-                .addGap(42, 42, 42)
+                .addGap(47, 47, 47)
                 .addComponent(bt_AgregarNodo)
-                .addGap(7, 7, 7)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
                     .addComponent(jLabel12))
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bt_EnseñarMatriz)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(83, 83, 83))
                     .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addComponent(bt_CalcularRutasMasCortas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+                            .addGroup(jPanel12Layout.createSequentialGroup()
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addGap(135, 135, 135)
-                                .addComponent(bt_CalcularRutasMasCortas)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
 
         javax.swing.GroupLayout JD_MenorCostoOrigenesLayout = new javax.swing.GroupLayout(JD_MenorCostoOrigenes.getContentPane());
@@ -947,6 +967,125 @@ public class Main extends javax.swing.JFrame {
         JD_MenorCostoOrigenesLayout.setVerticalGroup(
             JD_MenorCostoOrigenesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel8.setText("Creacion de Grafos Dijkstra");
+
+        bt_AgregarNodo1.setText("Enseñar Grafica");
+        bt_AgregarNodo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_AgregarNodo1MouseClicked(evt);
+            }
+        });
+
+        ta_Matriz1.setColumns(20);
+        ta_Matriz1.setRows(5);
+        jScrollPane11.setViewportView(ta_Matriz1);
+
+        ta_rutas1.setColumns(20);
+        ta_rutas1.setRows(5);
+        jScrollPane12.setViewportView(ta_rutas1);
+
+        jLabel13.setText("Matriz De adyacencia");
+
+        jLabel14.setText("Rutas mas Cortas");
+
+        bt_CalcularRutasMasCortas1.setText("Calcular");
+        bt_CalcularRutasMasCortas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_CalcularRutasMasCortas1MouseClicked(evt);
+            }
+        });
+
+        bt_EnseñarMatriz1.setText("Enseñar Matriz");
+        bt_EnseñarMatriz1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_EnseñarMatriz1MouseClicked(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel16.setText("Origen es 2");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(243, 243, 243)
+                .addComponent(bt_AgregarNodo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
+                .addGap(132, 132, 132))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(198, 198, 198))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bt_EnseñarMatriz1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_CalcularRutasMasCortas1))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addComponent(jLabel8)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addComponent(jLabel8)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_AgregarNodo1)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                                .addComponent(bt_EnseñarMatriz1)
+                                .addGap(85, 85, 85))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                                .addComponent(bt_CalcularRutasMasCortas1)
+                                .addGap(70, 70, 70))))))
+        );
+
+        javax.swing.GroupLayout JD_DijkstraLayout = new javax.swing.GroupLayout(JD_Dijkstra.getContentPane());
+        JD_Dijkstra.getContentPane().setLayout(JD_DijkstraLayout);
+        JD_DijkstraLayout.setHorizontalGroup(
+            JD_DijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JD_DijkstraLayout.createSequentialGroup()
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        JD_DijkstraLayout.setVerticalGroup(
+            JD_DijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1001,6 +1140,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton7.setText("Menor costo Origen");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
 
         jButton8.setText("Arboles");
         jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1509,13 +1653,58 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void bt_AgregarNodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_AgregarNodoMouseClicked
-        
+        try {
+            floyd.duro();
+            floyd.End();
+
+            Viewer viewer = floyd.Demostrar();
+            viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bt_AgregarNodoMouseClicked
 
     private void bt_EnseñarMatrizMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_EnseñarMatrizMouseClicked
-        floyd.Start();
         ta_Matriz.setText(floyd.MatrizFloyd());
+
     }//GEN-LAST:event_bt_EnseñarMatrizMouseClicked
+
+    private void bt_CalcularRutasMasCortasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_CalcularRutasMasCortasMouseClicked
+        floyd.Start();
+
+        ta_rutas.setText(floyd.MatrizFloyd(floyd.Distance));
+    }//GEN-LAST:event_bt_CalcularRutasMasCortasMouseClicked
+
+    private void bt_AgregarNodo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_AgregarNodo1MouseClicked
+        try {
+            //floyd.duro();
+            //floyd.End();
+            Dis.duro();
+            
+            
+            Viewer viewer = Dis.Demostrar();
+            viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bt_AgregarNodo1MouseClicked
+
+    private void bt_CalcularRutasMasCortas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_CalcularRutasMasCortas1MouseClicked
+        ta_rutas1.setText(Dis.MatrizDis(Dis.Disstrack()));
+        
+    }//GEN-LAST:event_bt_CalcularRutasMasCortas1MouseClicked
+
+    private void bt_EnseñarMatriz1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_EnseñarMatriz1MouseClicked
+        ta_Matriz1.setText(Dis.MatrizDis());
+    }//GEN-LAST:event_bt_EnseñarMatriz1MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        JD_Dijkstra.setEnabled(true);
+        JD_Dijkstra.setVisible(true);
+        JD_Dijkstra.pack();
+    }//GEN-LAST:event_jButton7MouseClicked
     public static String readfile(String path) throws FileNotFoundException, IOException {
         String acum, line;
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -1564,6 +1753,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog JD_Calculadora;
     private javax.swing.JDialog JD_Calculo;
     private javax.swing.JDialog JD_Compresion;
+    private javax.swing.JDialog JD_Dijkstra;
     private javax.swing.JDialog JD_GrafoBipartido;
     private javax.swing.JDialog JD_Laberinto;
     private javax.swing.JDialog JD_MenorCostoOrigenes;
@@ -1576,9 +1766,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField TF_IdNodo;
     private javax.swing.JButton boton_jefe;
     private javax.swing.JButton bt_AgregarNodo;
+    private javax.swing.JButton bt_AgregarNodo1;
     private javax.swing.JButton bt_BuscarArchivo;
     private javax.swing.JButton bt_CalcularRutasMasCortas;
+    private javax.swing.JButton bt_CalcularRutasMasCortas1;
     private javax.swing.JButton bt_EnseñarMatriz;
+    private javax.swing.JButton bt_EnseñarMatriz1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1599,17 +1792,23 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1620,6 +1819,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1650,10 +1851,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jt_direccion;
     private javax.swing.JTextField jt_pantalla;
     private javax.swing.JTextArea ta_Matriz;
+    private javax.swing.JTextArea ta_Matriz1;
     private javax.swing.JTextArea ta_rutas;
+    private javax.swing.JTextArea ta_rutas1;
     // End of variables declaration//GEN-END:variables
     char[][] Lab = new char[10][10];
     STACK Stack = new STACK();
+    Dijkstra Dis=new Dijkstra();
     ArrayList<Aristas> AA = new ArrayList();
     Graph grafo = new SingleGraph("Grafo");
     Floyd floyd = new Floyd();
