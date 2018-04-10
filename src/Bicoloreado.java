@@ -98,4 +98,11 @@ public class Bicoloreado  extends Grafos{
             return 3;
         }
     }
+    public void Limpiar(){
+        Color = 1;
+        for (Node node : G) {
+            node.setAttribute("Visto", false);
+            node.setAttribute("ui.style", "fill-color: grey;");
+        }
+    }
 }

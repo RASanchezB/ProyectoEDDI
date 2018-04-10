@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,16 +19,12 @@ import javax.swing.tree.MutableTreeNode;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 import org.graphstream.ui.view.Viewer;
-
 public class Main extends javax.swing.JFrame {
-
     Node<String> Root = null;
     int cont = 0;
-
     public Main() {
         initComponents();
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1269,9 +1264,41 @@ public class Main extends javax.swing.JFrame {
         JD_Compresion.pack();
     }//GEN-LAST:event_jButton4MouseClicked
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        JD_GrafoBipartido.setEnabled(true);
-        JD_GrafoBipartido.setVisible(true);
-        JD_GrafoBipartido.pack();
+        B.setG(grafo);
+        int O = 1;int Extra = 0;
+        String Que = "";
+        if(B.getG().getNodeCount() > 0){
+            B.Limpiar();
+            if(B.getG().getNodeCount()>0){
+                Extra = B.Precursor(O);
+                if(Extra == 1){
+                    JOptionPane.showMessageDialog(Menu, "Este grafo es bi-coloreable");
+                    Que = "Si";
+                }else if(Extra == 2){
+                    JOptionPane.showMessageDialog(Menu, "Este grafo no es bi-coloreable");
+                    Que = "No";
+                }else{
+                    Que = "";
+                }
+            }else{
+                O = 1;
+                if(Extra == 1){
+                    JOptionPane.showMessageDialog(Menu, "Este grafo es bi-coloreable");
+                    Que = "Si";
+                }else if(Extra == 2){
+                    JOptionPane.showMessageDialog(Menu, "Este grafo no es bi-coloreable");
+                    Que = "No";
+                }else{
+                    Que = "";
+                }
+                
+            }
+        }else{
+            System.out.println("Algo salio mal. Puede que no haya un grafo");
+        }
+        //JD_GrafoBipartido.setEnabled(true);
+        //JD_GrafoBipartido.setVisible(true);
+        //JD_GrafoBipartido.pack();
     }//GEN-LAST:event_jButton5MouseClicked
     private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
 
@@ -1645,31 +1672,26 @@ public class Main extends javax.swing.JFrame {
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
         grafo.display();
     }//GEN-LAST:event_jButton11MouseClicked
-
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         JD_MenorCostoOrigenes.setEnabled(true);
         JD_MenorCostoOrigenes.setVisible(true);
         JD_MenorCostoOrigenes.pack();
     }//GEN-LAST:event_jButton6MouseClicked
-
     private void bt_AgregarNodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_AgregarNodoMouseClicked
         floyd.duro();
         floyd.End();
         Viewer viewer = floyd.Demostrar();
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
     }//GEN-LAST:event_bt_AgregarNodoMouseClicked
-
     private void bt_EnseñarMatrizMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_EnseñarMatrizMouseClicked
         ta_Matriz.setText(floyd.MatrizFloyd());
 
     }//GEN-LAST:event_bt_EnseñarMatrizMouseClicked
-
     private void bt_CalcularRutasMasCortasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_CalcularRutasMasCortasMouseClicked
         floyd.Start();
 
         ta_rutas.setText(floyd.MatrizFloyd(floyd.Distance));
     }//GEN-LAST:event_bt_CalcularRutasMasCortasMouseClicked
-
     private void bt_AgregarNodo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_AgregarNodo1MouseClicked
         //floyd.duro();
         //floyd.End();
@@ -1677,16 +1699,13 @@ public class Main extends javax.swing.JFrame {
         Viewer viewer = Dis.Demostrar();
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
     }//GEN-LAST:event_bt_AgregarNodo1MouseClicked
-
     private void bt_CalcularRutasMasCortas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_CalcularRutasMasCortas1MouseClicked
         ta_rutas1.setText(Dis.MatrizDis(Dis.Disstrack()));
         
     }//GEN-LAST:event_bt_CalcularRutasMasCortas1MouseClicked
-
     private void bt_EnseñarMatriz1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_EnseñarMatriz1MouseClicked
         ta_Matriz1.setText(Dis.MatrizDis());
     }//GEN-LAST:event_bt_EnseñarMatriz1MouseClicked
-
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         JD_Dijkstra.setEnabled(true);
         JD_Dijkstra.setVisible(true);
@@ -1848,4 +1867,5 @@ public class Main extends javax.swing.JFrame {
     ArrayList<Aristas> AA = new ArrayList();
     Graph grafo = new SingleGraph("Grafo");
     Floyd floyd = new Floyd();
+    Bicoloreado B = new Bicoloreado();
 }
