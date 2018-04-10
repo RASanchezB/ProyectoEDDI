@@ -33,6 +33,7 @@ public class Floyd extends Grafos {
     }
 
     public void End() {
+        
         this.Distance = super.Lados.clone();
         //camino new
         trayecto = new double[Distance.length][Distance.length];
@@ -43,10 +44,30 @@ public class Floyd extends Grafos {
                         Distance[i][j] = Double.POSITIVE_INFINITY;
                     }
                     trayecto[i][j] = j;
-                }else{
-                    trayecto[i][j]=0;
+                } else {
+                    trayecto[i][j] = 0;
                 }
             }
         }
     }
+
+    public String MatrizFloyd() {
+        String matriz = null;
+        for (int i = 0; i < G.getNodeCount(); i++) {
+            for (int j = 0; j < G.getNodeCount(); j++) {
+                if (i == 0 && j == 0) {
+                    matriz += "{ }";
+                } else if (i == 0) {
+                    matriz += "  " + j + "  ";
+                } else if (j == 0) {
+                    matriz += "  " + i + "  ";
+                } else {
+                    matriz+=" "+Lados[i-1][j-1]+" ";
+                }
+            }
+            matriz+='\n';
+        }
+        return matriz;
+    }
+    
 }

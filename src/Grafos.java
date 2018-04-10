@@ -17,6 +17,7 @@ public class Grafos {
         this.G = G;
     }
     public double[][] getLados() {
+        
         return Lados;
     }
     public void setLados(double[][] Lados) {
@@ -46,8 +47,11 @@ public class Grafos {
                     Y = ID.indexOf(destino.getId());
                     R[X][Y] = aristas.getNumber("Valor");
                 }
-                if(Movimiento == 3){
+                else if(Movimiento == 3){
                     if((node.getId().equals(origen.getId()))){
+                        Y = ID.indexOf(destino.getId());
+                        R[X][Y] = aristas.getNumber("Valor");
+                    }else if ((node.getId().equals(destino.getId()))) {
                         Y = ID.indexOf(origen.getId());
                         R[X][Y] = aristas.getNumber("Valor");
                     }
@@ -55,6 +59,7 @@ public class Grafos {
             }
             X++;
         }
+        Lados=R;
         return R;
     }
     public int Distancia(int[] D, boolean[] YaVisitados){
@@ -76,7 +81,8 @@ public class Grafos {
         }
         G.addAttribute("ui.quality");
         G.addAttribute("ui.antialias");
-        G.addAttribute("ui.stylesheet","edge{fill-color:grey}"+"node{fill-color: grey}");
+        G.addAttribute("ui.stylesheet",
+                "edge { fill-color: grey;}");
         for (Node node : G) {
             node.setAttribute("ui.label", node.getId());
             node.addAttribute("ui.size",10);

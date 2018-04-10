@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,11 +16,16 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
+import org.graphstream.ui.view.Viewer;
+
 public class Main extends javax.swing.JFrame {
+
     Node<String> Root = null;
+    int cont=0;
     public Main() {
         initComponents();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,6 +99,18 @@ public class Main extends javax.swing.JFrame {
         JL_LNodo2 = new javax.swing.JList<>();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        JD_MenorCostoOrigenes = new javax.swing.JDialog();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        bt_AgregarNodo = new javax.swing.JButton();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        ta_Matriz = new javax.swing.JTextArea();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        ta_rutas = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        bt_CalcularRutasMasCortas = new javax.swing.JButton();
+        bt_EnseñarMatriz = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -828,6 +846,109 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel7.setText("Creacion de Grafos");
+
+        bt_AgregarNodo.setText("Enseñar Grafica");
+        bt_AgregarNodo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_AgregarNodoMouseClicked(evt);
+            }
+        });
+
+        ta_Matriz.setColumns(20);
+        ta_Matriz.setRows(5);
+        jScrollPane9.setViewportView(ta_Matriz);
+
+        ta_rutas.setColumns(20);
+        ta_rutas.setRows(5);
+        jScrollPane10.setViewportView(ta_rutas);
+
+        jLabel9.setText("Matriz De adyacencia");
+
+        jLabel12.setText("Rutas mas Cortas");
+
+        bt_CalcularRutasMasCortas.setText("Calcular");
+
+        bt_EnseñarMatriz.setText("Enseñar Matriz");
+        bt_EnseñarMatriz.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_EnseñarMatrizMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_EnseñarMatriz)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_CalcularRutasMasCortas))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel9)
+                        .addGap(157, 157, 157)
+                        .addComponent(jLabel12)))
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(241, 241, 241))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addComponent(bt_AgregarNodo)
+                        .addGap(107, 107, 107))))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addGap(42, 42, 42)
+                .addComponent(bt_AgregarNodo)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel12))
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(bt_EnseñarMatriz)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addGap(135, 135, 135)
+                                .addComponent(bt_CalcularRutasMasCortas)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        javax.swing.GroupLayout JD_MenorCostoOrigenesLayout = new javax.swing.GroupLayout(JD_MenorCostoOrigenes.getContentPane());
+        JD_MenorCostoOrigenes.getContentPane().setLayout(JD_MenorCostoOrigenesLayout);
+        JD_MenorCostoOrigenesLayout.setHorizontalGroup(
+            JD_MenorCostoOrigenesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        JD_MenorCostoOrigenesLayout.setVerticalGroup(
+            JD_MenorCostoOrigenesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Proyecto de Estructura");
 
@@ -873,6 +994,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton6.setText("Menor costo Origenes");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
 
         jButton7.setText("Menor costo Origen");
 
@@ -1289,8 +1415,8 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jm_hijoActionPerformed
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
-        DefaultListModel lista1 = (DefaultListModel)JL_LNodo1.getModel();
-        DefaultListModel lista2 = (DefaultListModel)JL_LNodo2.getModel();
+        DefaultListModel lista1 = (DefaultListModel) JL_LNodo1.getModel();
+        DefaultListModel lista2 = (DefaultListModel) JL_LNodo2.getModel();
         grafo.addNode(TF_IdNodo.getText());
         lista1.addElement(TF_IdNodo.getText());
         lista2.addElement(TF_IdNodo.getText());
@@ -1329,31 +1455,30 @@ public class Main extends javax.swing.JFrame {
         DefaultTreeModel model = (DefaultTreeModel) Arbol.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
 
-        
-        double acum=0,total=0;
-        int cont=0;
-        String temp,numero;
+        double acum = 0, total = 0;
+        int cont = 0;
+        String temp, numero;
         for (int i = 0; i < Root.getChildren().size(); i++) {
-            temp=Root.getChildren().get(i).getData();
-            int index=temp.indexOf("-");
-            numero=temp.substring(index+1, Root.getChildren().get(i).getData().length());
-            acum+=Double.parseDouble(numero);
+            temp = Root.getChildren().get(i).getData();
+            int index = temp.indexOf("-");
+            numero = temp.substring(index + 1, Root.getChildren().get(i).getData().length());
+            acum += Double.parseDouble(numero);
             cont++;
         }
-        total=acum/cont;
-        numero=Double.toString(total);
-        temp=Root.getData();
-        Root.setData(temp+"/"+numero);
+        total = acum / cont;
+        numero = Double.toString(total);
+        temp = Root.getData();
+        Root.setData(temp + "/" + numero);
         //
         DefaultMutableTreeNode n = new DefaultMutableTreeNode(Root.getData());
-        int algo=model.getChildCount(raiz);
-        ArrayList hijos=new ArrayList();
+        int algo = model.getChildCount(raiz);
+        ArrayList hijos = new ArrayList();
         for (int i = 0; i < algo; i++) {
             hijos.add(model.getChild(raiz, i));
         }
         model.setRoot(n);
         model.reload();
-         model = (DefaultTreeModel) Arbol.getModel();
+        model = (DefaultTreeModel) Arbol.getModel();
         raiz = (DefaultMutableTreeNode) model.getRoot();
         for (int i = 0; i < hijos.size(); i++) {
             raiz.add((MutableTreeNode) hijos.get(i));
@@ -1361,20 +1486,36 @@ public class Main extends javax.swing.JFrame {
         model.reload();
     }//GEN-LAST:event_jb_ActualizarMouseClicked
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
-        DefaultListModel lista1 = (DefaultListModel)JL_LNodo1.getModel();
-        DefaultListModel lista2 = (DefaultListModel)JL_LNodo2.getModel();
+        DefaultListModel lista1 = (DefaultListModel) JL_LNodo1.getModel();
+        DefaultListModel lista2 = (DefaultListModel) JL_LNodo2.getModel();
         String N1 = JL_LNodo1.getSelectedValue();
         String N2 = JL_LNodo2.getSelectedValue();
-        String N3 = ""+N1+N2;
-        if(!(N1).equals(N2)){
+        String N3 = "" + N1 + N2;
+        if (!(N1).equals(N2)) {
             grafo.addEdge(N3, N1, N2);
-        }else{
+            JOptionPane.showMessageDialog(Menu, "Se ha unido: " + N1 + " con" + N2 + "EXITOSAMENTE");
+        } else {
             JOptionPane.showMessageDialog(Menu, "No se puede crear una arista hacia el mismo nodo");
         }
     }//GEN-LAST:event_jButton10MouseClicked
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
         grafo.display();
     }//GEN-LAST:event_jButton11MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        JD_MenorCostoOrigenes.setEnabled(true);
+        JD_MenorCostoOrigenes.setVisible(true);
+        JD_MenorCostoOrigenes.pack();
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void bt_AgregarNodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_AgregarNodoMouseClicked
+        
+    }//GEN-LAST:event_bt_AgregarNodoMouseClicked
+
+    private void bt_EnseñarMatrizMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_EnseñarMatrizMouseClicked
+        floyd.Start();
+        ta_Matriz.setText(floyd.MatrizFloyd());
+    }//GEN-LAST:event_bt_EnseñarMatrizMouseClicked
     public static String readfile(String path) throws FileNotFoundException, IOException {
         String acum, line;
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -1384,6 +1525,7 @@ public class Main extends javax.swing.JFrame {
         }
         return acum;
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1424,6 +1566,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog JD_Compresion;
     private javax.swing.JDialog JD_GrafoBipartido;
     private javax.swing.JDialog JD_Laberinto;
+    private javax.swing.JDialog JD_MenorCostoOrigenes;
     private javax.swing.JList<String> JL_LNodo1;
     private javax.swing.JList<String> JL_LNodo2;
     private javax.swing.JPopupMenu Menu;
@@ -1432,7 +1575,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextArea TA_L;
     private javax.swing.JTextField TF_IdNodo;
     private javax.swing.JButton boton_jefe;
+    private javax.swing.JButton bt_AgregarNodo;
     private javax.swing.JButton bt_BuscarArchivo;
+    private javax.swing.JButton bt_CalcularRutasMasCortas;
+    private javax.swing.JButton bt_EnseñarMatriz;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1452,14 +1598,18 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1469,11 +1619,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JButton jb_0;
@@ -1497,9 +1649,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jm_hijo;
     private javax.swing.JTextField jt_direccion;
     private javax.swing.JTextField jt_pantalla;
+    private javax.swing.JTextArea ta_Matriz;
+    private javax.swing.JTextArea ta_rutas;
     // End of variables declaration//GEN-END:variables
     char[][] Lab = new char[10][10];
     STACK Stack = new STACK();
     ArrayList<Aristas> AA = new ArrayList();
     Graph grafo = new SingleGraph("Grafo");
+    Floyd floyd = new Floyd();
 }
