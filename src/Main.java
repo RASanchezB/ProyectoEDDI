@@ -1653,16 +1653,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void bt_AgregarNodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_AgregarNodoMouseClicked
-        try {
-            floyd.duro();
-            floyd.End();
-
-            Viewer viewer = floyd.Demostrar();
-            viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
-
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        floyd.duro();
+        floyd.End();
+        Viewer viewer = floyd.Demostrar();
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
     }//GEN-LAST:event_bt_AgregarNodoMouseClicked
 
     private void bt_EnseñarMatrizMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_EnseñarMatrizMouseClicked
@@ -1677,18 +1671,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_CalcularRutasMasCortasMouseClicked
 
     private void bt_AgregarNodo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_AgregarNodo1MouseClicked
-        try {
-            //floyd.duro();
-            //floyd.End();
-            Dis.duro();
-            
-            
-            Viewer viewer = Dis.Demostrar();
-            viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
-
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //floyd.duro();
+        //floyd.End();
+        Dis.duro();
+        Viewer viewer = Dis.Demostrar();
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
     }//GEN-LAST:event_bt_AgregarNodo1MouseClicked
 
     private void bt_CalcularRutasMasCortas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_CalcularRutasMasCortas1MouseClicked
